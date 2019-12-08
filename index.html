@@ -6,204 +6,244 @@
   <title>MAP 673 Final Project</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
-  <!-- add to HEAD of document -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Heebo:300&display=swap" rel="stylesheet">
 
-<!-- add toward bottom of the document body -->
-  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
   <style>
     /* custom CSS style rules written here*/
+    h1, h2, h3, h4, h5 {
+      font-family: 'Comfortaa', cursive;
+    }
+
+    p {
+
+    }
   </style>
 </head>
 
 <body>
   <div class='flex-parent viewport-full relative scroll-hidden'>
-  <div class='flex-child w-full w300-ml absolute static-ml left bottom'>
-    <div class='flex-parent flex-parent--column viewport-third h-full-ml hmax-full bg-white py18 px12'>
-      <div class='flex-child flex-child--grow px12 py12 scroll-auto'>
-        <h1 class='txt-h3 mb6'>Comparing the Economic Impact of Mountain Biking on Six National Forest</h1>
-        <p>Mountain biking has been shown to deliver a positive impact to communities by attracting visitors, stimulating new job creation, encouraging migration, and contributing to development of a sense of place.
-           Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia
-          bibendum
-          nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus
-          et magnis dis parturient montes, nascetur ridiculus mus.</p>
-        <h2 class='txt-xl mt18 mb12'>subheading</h2>
-        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed posuere
-          consectetur est
-          at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia
-          bibendum
-          nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus
-          et magnis dis parturient montes, nascetur ridiculus mus.</p>
+    <div class='flex-child w-full w300-ml absolute static-ml left bottom'>
+      <div class='flex-parent flex-parent--column viewport-third h-full-ml hmax-full bg-white py18 px12'>
+        <div class='flex-child flex-child--grow px12 py12 scroll-auto'>
+          <h1 class='txt-h3 mb6'>Comparing the Economic Impact of Mountain Biking on Six National Forest</h1>
+          <p>Mountain biking has been shown to deliver a positive impact to communities by attracting visitors, stimulating new job creation, encouraging migration, and contributing to development of a sense of place.
+            Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia
+            bibendum
+            nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus
+            et magnis dis parturient montes, nascetur ridiculus mus.</p>
+          <h2 class='txt-h4 mt18 mb12'>About this Map</h2>
+          <p>Economic impact data was gathered in 2017 and 2018. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed posuere
+            consectetur est
+            at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia
+            bibendum
+            nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus
+            et magnis dis parturient montes, nascetur ridiculus mus.</p>
+            <img src=https://live.staticflickr.com/8823/29530130822_fa756b0493.jpg alt="Mountain Biker in Forest"/>
+        </div>
+        <footer class='px12 py12 bg-gray-faint txt-s'>
+          <ul>
+            <li>Explore the raw data
+              <a class='link' href='https://www.imba.com/sites/default/files/content/resources/2018-11/OA_GMUGNF_MtnBikingStudy2018.pdf'>Economic Impact of Mountain Biking in the Grand Mesa, Uncompahgre & Gunnison National Forests</a>
+              <a class='link' href='https://www.imba.com/sites/default/files/content/resources/2018-11/OA_CusterGallatinNF_MtnBikingStudy2018.pdf'>Economic Impact of Mountain Biking in the Custer Gallatin National Forest</a>
+              <a class='link' href='https://www.imba.com/sites/default/files/content/resources/2018-06/OA_NPNF_MtnBikingStudy.pdf'>Economic Impact of Mountain Biking in the Nantahala and Pisgah National Forests</a>
+            </li>
+            <li>Map authored by
+              <a class='link' href='https://robinmaps.com'>Robin Bruns</a>
+            </li>
+          </ul>
+        </footer>
       </div>
-      <footer class='px12 py12 bg-gray-faint txt-s'>
-        <ul>
-          <li>Explore the raw
-            <a class='link' href='#'>data</a>
-          </li>
-          <li>Map authored by
-            <a class='link' href='#'>Ptolemy</a>
-          </li>
-        </ul>
-      </footer>
     </div>
-  </div>
-  <div class='flex-child flex-child--grow viewport-twothirds viewport-full-ml'>
-    <div id="map" class='viewport-twothirds viewport-full-ml'></div>
-  </div>
+    <div class='flex-child flex-child--grow viewport-twothirds viewport-full-ml'>
+      <div id="map" class='viewport-twothirds viewport-full-ml'></div>
+    </div>
 
-</div>
-<div id='ui-controls'>
-<label>Choose a data attribute:</label>
-<select id="occupied">
-  <option value="JOBS_SUPPORTED_DIRECT" selected>Jobs Supported</option>
-  <option value="LABOR_INCOME_DIRECT">Labor Income</option>
-  <option value="VALUE_ADDED_DIRECT">Value Added</option>
-  <option value="OUTPUT_DIRECT">Output</option>
-</select>
-</div> <!-- end ui-controls -->
+  </div>
+  <div id='ui-controls'>
+    <label>Choose a data attribute:</label>
+    <select id="occupied">
+      <option value="JOBS_SUPPORTED_DIRECT" selected>Jobs Supported</option>
+      <option value="LABOR_INCOME_DIRECT">Labor Income</option>
+      <option value="VALUE_ADDED_DIRECT">Value Added</option>
+      <option value="OUTPUT_DIRECT">Output</option>
+    </select>
+  </div> <!-- end ui-controls -->
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
   <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.js"></script>
   <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
   <script>
     // custom JavaScript written here
     // initialize map, centered on Kenya
-  var map = L.map('map', {
-    zoomSnap: .1,
-    center: [39, -98],
-    zoom: 4,
-  });
+    var map = L.map('map', {
+      zoomSnap: .1,
+      center: [39, -98],
+      zoom: 4,
+    });
 
-  // this is the data that needs to correspond to each attributeValue
-  var jobsSupported = {
-  attributeValue: "JOBS_SUPPORTED_DIRECT",
-  normValue : "TOTAL_EMPLOYMENT",
-  factor: 500,
-  tooltip: "full time jobs supported",
-  };
+    // this is the data that needs to correspond to each attributeValue
+    var jobsSupported = {
+      attributeValue: "JOBS_SUPPORTED_DIRECT",
+      normValue: "TOTAL_EMPLOYMENT",
+      factor: 500,
+      tooltip: "full time jobs supported",
+      fillColor: '#d4ac91',
+    };
 
-  var laborIncome = {
-  attributeValue: "LABOR_INCOME_DIRECT",
-  normValue : "TOTAL_PERSONAL_INCOME",
-  factor: 1,
-  tooltip: "dollars labor income",
-  };
+    var laborIncome = {
+      attributeValue: "LABOR_INCOME_DIRECT",
+      normValue: "TOTAL_PERSONAL_INCOME",
+      factor: 1,
+      tooltip: "dollars labor income",
+      fillColor: '#666754',
+    };
 
-  var valueAdded = {
-  attributeValue: "VALUE_ADDED_DIRECT",
-  normValue : "GROSS_REGIONAL_PRODUCT",
-  factor: 1,
-  tooltip: "dollars value added",
-  };
+    var valueAdded = {
+      attributeValue: "VALUE_ADDED_DIRECT",
+      normValue: "GROSS_REGIONAL_PRODUCT",
+      factor: 1,
+      tooltip: "dollars value added",
+      fillColor: '#374c5e',
+    };
 
-  var output = {
-  attributeValue: "OUTPUT_DIRECT",
-  normValue : "GROSS_REGIONAL_PRODUCT",
-  factor: 1,
-  tooltip: "dollars output",
-  };
+    var output = {
+      attributeValue: "OUTPUT_DIRECT",
+      normValue: "GROSS_REGIONAL_PRODUCT",
+      factor: 1,
+      tooltip: "dollars output",
+      fillColor: '#4d3a4c',
+    };
 
-  var attributeValue = "JOBS_SUPPORTED_DIRECT";
-      normValue = "TOTAL_EMPLOYMENT";
+    var attributeValue = "JOBS_SUPPORTED_DIRECT";
+    normValue = "TOTAL_EMPLOYMENT";
 
-// mapbox API access Token
-var accessToken = 'pk.eyJ1Ijoicm9iaW5icnVucyIsImEiOiJjaW5zZTQ0eGQxMTRqdWttM2M2ZnBsaG94In0.s1doTs0FkLp2ZzYqiUnbTw'
+    // mapbox API access Token
+    var accessToken = 'pk.eyJ1Ijoicm9iaW5icnVucyIsImEiOiJjaW5zZTQ0eGQxMTRqdWttM2M2ZnBsaG94In0.s1doTs0FkLp2ZzYqiUnbTw'
 
-// request a mapbox raster tile layer and add to map
-  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + accessToken, {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox.light',
-    accessToken: accessToken
-  }).addTo(map);
+    // // request a mapbox raster tile layer and add to map
+    // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + accessToken, {
+    //   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    //   maxZoom: 18,
+    //   id: 'mapbox.light',
+    //   accessToken: accessToken
+    // }).addTo(map);
 
-  omnivore.csv('data/mtb_impacts.csv')
-  .on('ready', function(e) {
-      drawMap(e.target.toGeoJSON());
-})
-.on('error', function(e) {
-    console.log(e.error[0].message);
-});
+    var basemap_url = 'https://api.mapbox.com/styles/v1/robinbruns/ck3vvim0h0ks81cud89l6r2ap/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoicm9iaW5icnVucyIsImEiOiJjaW5zZTQ0eGQxMTRqdWttM2M2ZnBsaG94In0.s1doTs0FkLp2ZzYqiUnbTw'
 
-function addUi(impactsLayer) {
-  // create the slider control
-  var selectControl = L.control({ position: 'topright'} );
+		// Get basemap attributes from Leaflet Providers
+		var basemap_attributes = {
+			attribution: "&copy; <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+			maxZoom: 19
+		};
+		// requests some map tiles
+		var tiles = L.tileLayer(basemap_url, basemap_attributes);
 
-  // when control is added
-  selectControl.onAdd = function(map) {
-    // get the element with id attribute of ui-controls
-    return L.DomUtil.get("ui-controls");
-  }
-  // add the control to the map
-  selectControl.addTo(map);
-  $('select[id="occupied"]').change(function () {
+		map.addLayer(tiles);
 
-    // store reference to currently selected value
-    attributeValue = $(this).val();
 
-    // call updateMap function
-    resizeCircles(impactsLayer, attributeValue, normValue);
+    omnivore.csv('data/mtb_impacts.csv')
+      .on('ready', function(e) {
+        drawMap(e.target.toGeoJSON());
+      })
+      .on('error', function(e) {
+        console.log(e.error[0].message);
+      });
 
-  });
-}
+    function addUi(impactsLayer) {
+      // create the slider control
+      var selectControl = L.control({
+        position: 'topright'
+      });
 
-function drawMap(data) {
-    // access to data here
-    console.log(data);
-    var options = {
-      pointToLayer: function (feature, ll) {
-        return L.circleMarker(ll, {
+      // when control is added
+      selectControl.onAdd = function(map) {
+        // get the element with id attribute of ui-controls
+        return L.DomUtil.get("ui-controls");
+      }
+      // add the control to the map
+      selectControl.addTo(map);
+      $('select[id="occupied"]').change(function() {
+
+        // store reference to currently selected value
+        attributeValue = $(this).val();
+
+        // call updateMap function
+        resizeCircles(impactsLayer, attributeValue, normValue);
+
+      });
+    }
+
+    function drawMap(data) {
+      // access to data here
+      console.log(data);
+      var options = {
+        pointToLayer: function(feature, ll) {
+          return L.circleMarker(ll, {
             opacity: 1,
             weight: 2,
             fillOpacity: 0,
-        })
+          })
+        }
       }
+
+      var impactsLayer = L.geoJson(data, options).addTo(map);
+
+      impactsLayer.setStyle({
+        color: '#b9784a',
+      });
+
+
+      addUi(impactsLayer); // add the UI controls
+      resizeCircles(impactsLayer, attributeValue, normValue);
     }
 
-  var impactsLayer = L.geoJson(data, options).addTo(map);
+    function updateMap(dataLayer) {
+      console.log(attributeValue);
+    }
 
-  impactsLayer.setStyle({
-    color: '#D96D02',
-});
+    function calcRadius(val) {
 
+      var factor = 500;
+      var radius = Math.sqrt(val / Math.PI);
+      return radius * factor; // adjusts var factor as a scale factor
 
-addUi(impactsLayer); // add the UI controls
-resizeCircles(impactsLayer, attributeValue, normValue);
-}
+    }
 
-function updateMap(dataLayer) {
-console.log(attributeValue);
-}
+    function resizeCircles(impactsLayer, attributeValue, normValue) {
 
-function calcRadius(val) {
+      impactsLayer.eachLayer(function(layer) {
+        var props = layer.feature.properties;
+        value = props[attributeValue] / props[normValue];
+        var radius = calcRadius(value);
+        layer.setRadius(radius);
 
-  var factor = 500;
-  var radius = Math.sqrt(val / Math.PI);
-  return radius * factor; // adjusts var factor as a scale factor
+        var tooltipInfo = props.LOCATION + ", " + props.STATE + "<br>" + props[attributeValue] + "<br>" + props.FOREST_NAME;
 
-}
+        layer.bindTooltip(tooltipInfo, {
+          // sticky property so tooltip follows the mouse
+          sticky: true,
+          tooltipAnchor: [200, 200]
+        });
+      });
 
-function resizeCircles(impactsLayer, attributeValue, normValue) {
+      impactsLayer.on('mouseover', function(e) {
+        e.layer.setStyle({
+          fillOpacity: .6,
+          fillColor: '#d4ac91'
+        });
+      });
 
-  impactsLayer.eachLayer(function (layer) {
-    var props = layer.feature.properties;
-    value = props[attributeValue]/props[normValue];
-    var radius = calcRadius(value);
-    layer.setRadius(radius);
+      impactsLayer.on('mouseout', function(e) {
 
-    var tooltipInfo = props.LOCATION + ", "  + props.STATE + "<br>" + props[attributeValue] ;
-
-    layer.bindTooltip(tooltipInfo, {
-      // sticky property so tooltip follows the mouse
-      sticky: true,
-      tooltipAnchor: [200, 200]
-    });
-  });
-
-
-}
-
-
+        // reset the layer style
+        e.layer.setStyle({
+          fillOpacity: 0
+        });
+      });
+    }
   </script>
 </body>
 
