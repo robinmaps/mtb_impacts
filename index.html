@@ -80,8 +80,8 @@
     // initialize map, centered on Kenya
     var map = L.map('map', {
       zoomSnap: .1,
-      center: [39, -98],
-      zoom: 4,
+      center: [42.1, -96],
+      zoom: 5,
     });
 
     // this is the data that needs to correspond to each attributeValue
@@ -152,30 +152,6 @@
         console.log(e.error[0].message);
       });
 
-    function addUi(impactsLayer) {
-      // create the slider control
-      var selectControl = L.control({
-        position: 'topright'
-      });
-
-      // when control is added
-      selectControl.onAdd = function(map) {
-        // get the element with id attribute of ui-controls
-        return L.DomUtil.get("ui-controls");
-      }
-      // add the control to the map
-      selectControl.addTo(map);
-      $('select[id="occupied"]').change(function() {
-
-        // store reference to currently selected value
-        attributeValue = $(this).val();
-
-        // call updateMap function
-        resizeCircles(impactsLayer, attributeValue, normValue);
-
-      });
-    }
-
     function drawMap(data) {
       // access to data here
       console.log(data);
@@ -200,8 +176,53 @@
       resizeCircles(impactsLayer, attributeValue, normValue);
     }
 
-    function updateMap(dataLayer) {
-      console.log(attributeValue);
+    function addUi(impactsLayer) {
+      // create the slider control
+      var selectControl = L.control({
+        position: 'topright'
+      });
+
+      // when control is added
+      selectControl.onAdd = function(map) {
+        // get the element with id attribute of ui-controls
+        return L.DomUtil.get("ui-controls");
+      }
+      // add the control to the map
+      selectControl.addTo(map);
+      $('select[id="occupied"]').change(function() {
+
+        // store reference to currently selected value
+        attributeValue = $(this).val();
+        console.log("the attribute value is:" + attributeValue);
+          if (attributeValue == "JOBS_SUPPORTED_DIRECT") {
+            normValue = "TOTAL_EMPLOYMENT";
+            impactsLayer.setStyle({
+              color: '#d4ac91',
+            });
+          }
+          else if (attributeValue == "LABOR_INCOME_DIRECT") {
+            normValue = "TOTAL_PERSONAL_INCOME";
+            impactsLayer.setStyle({
+              color: '#666754',
+            });
+          }
+          else if (attributeValue == "VALUE_ADDED_DIRECT") {
+            normValue = "GROSS_REGIONAL_PRODUCT";
+            impactsLayer.setStyle({
+              color: '#374c5e',
+            });
+          }
+          else if (attributeValue == "OUTPUT_DIRECT") {
+            normValue = "GROSS_REGIONAL_PRODUCT";
+            impactsLayer.setStyle({
+              color: '#4d3a4c',
+            });
+          }
+
+        // call updateMap function
+        resizeCircles(impactsLayer, attributeValue, normValue);
+
+      });
     }
 
     function calcRadius(val) {
@@ -219,6 +240,7 @@
         value = props[attributeValue] / props[normValue];
         var radius = calcRadius(value);
         layer.setRadius(radius);
+        // console.log ("attributevalue:" + attributeValue + "normvalue:" + normValue);
 
         var tooltipInfo = props.LOCATION + ", " + props.STATE + "<br>" + props[attributeValue] + "<br>" + props.FOREST_NAME;
 
@@ -231,8 +253,8 @@
 
       impactsLayer.on('mouseover', function(e) {
         e.layer.setStyle({
-          fillOpacity: .6,
-          fillColor: '#d4ac91'
+          fillOpacity: .4,
+          // fillColor: '#d4ac91'
         });
       });
 
