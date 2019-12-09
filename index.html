@@ -3,7 +3,7 @@
 
 <head>
   <meta charset=utf-8 />
-  <title>MAP 673 Final Project</title>
+  <title>Economic Impact of Mountain Biking</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
@@ -128,7 +128,7 @@
     };
 
     var attributeValue = "JOBS_SUPPORTED_DIRECT";
-    normValue = "TOTAL_EMPLOYMENT";
+    var normValue = "TOTAL_EMPLOYMENT";
 
     // mapbox API access Token
     var accessToken = 'pk.eyJ1Ijoicm9iaW5icnVucyIsImEiOiJjaW5zZTQ0eGQxMTRqdWttM2M2ZnBsaG94In0.s1doTs0FkLp2ZzYqiUnbTw'
@@ -245,7 +245,7 @@
 
       impactsLayer.eachLayer(function (layer) {
         var props = layer.feature.properties;
-        value = props[attributeValue] / props[normValue];
+        var value = props[attributeValue] / props[normValue];
         var radius = calcRadius(value);
         layer.setRadius(radius);
         // console.log ("attributevalue:" + attributeValue + "normvalue:" + normValue);
