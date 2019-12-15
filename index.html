@@ -23,6 +23,11 @@
 
     }
 
+    .special {
+      color: #387a60;
+      font-weight: 800;
+    }
+
     p {
       font-family: 'Heebo', sans-serif;
     }
@@ -38,9 +43,9 @@
     <div class='flex-child w-full w300-ml absolute static-ml left bottom'>
       <div class='flex-parent flex-parent--column viewport-third h-full-ml hmax-full bg-white py18 px12'>
         <div class='flex-child flex-child--grow px12 py12 scroll-auto'>
-          <h1 class='txt-h3 mb6'>Comparing the Economic Impact of Mountain Biking on Six National Forest</h1>
-          <p>Mountain biking have been shown to deliver benefits beyond the trails. Visitors traveling to mountain biking destinations
-            open their wallets in the surrounding communities. The impact of this tourism adds up.
+          <h1 class='txt-h3 mb6'>Comparing the Economic Impact of Mountain Biking on Six National Forests</h1>
+          <p>Mountain biking has been shown to deliver benefits beyond the trails. Visitors traveling to mountain biking destinations
+            open their wallets in surrounding communities. The impact of this tourism adds up.
           </p>
           <p>
             This map shows the economic impact of mountain biking on National Forest lands in 15 study areas in Colorado, Montana, and North Carolina. </p>
@@ -75,7 +80,7 @@
 
   </div>
   <div id='ui-controls'>
-    <label>Choose a data attribute:</label>
+    <label class='special'>Choose a data attribute:</label>
     <select id="occupied">
       <option value="JOBS_SUPPORTED_DIRECT" selected>Jobs Supported</option>
       <option value="LABOR_INCOME_DIRECT">Labor Income</option>
@@ -97,52 +102,25 @@
       zoom: 5,
     });
 
-    // this is the data that needs to correspond to each attributeValue
-    var jobsSupported = {
-      attributeValue: "JOBS_SUPPORTED_DIRECT",
-      normValue: "TOTAL_EMPLOYMENT",
-      factor: 500,
-      tooltip: "full time jobs supported",
-      fillColor: '#d4ac91',
-    };
+    var size = {
+       "JOBS_SUPPORTED_DIRECT": 5,
+       "LABOR_INCOME_DIRECT": .1,
+       "VALUE_ADDED_DIRECT": .1,
+       "OUTPUT_DIRECT": .1,
+    }
 
-    var laborIncome = {
-      attributeValue: "LABOR_INCOME_DIRECT",
-      normValue: "TOTAL_PERSONAL_INCOME",
-      factor: 1,
-      tooltip: "dollars labor income",
-      fillColor: '#666754',
-    };
+    var label = {
+      "JOBS_SUPPORTED_DIRECT": "Full Time Jobs Supported",
+      "LABOR_INCOME_DIRECT": "dollars labor income",
+      "VALUE_ADDED_DIRECT": "dollars value added",
+      "OUTPUT_DIRECT": "dollars output",
 
-    var valueAdded = {
-      attributeValue: "VALUE_ADDED_DIRECT",
-      normValue: "GROSS_REGIONAL_PRODUCT",
-      factor: 1,
-      tooltip: "dollars value added",
-      fillColor: '#374c5e',
-    };
-
-    var output = {
-      attributeValue: "OUTPUT_DIRECT",
-      normValue: "GROSS_REGIONAL_PRODUCT",
-      factor: 1,
-      tooltip: "dollars output",
-      fillColor: '#4d3a4c',
-    };
+    }
 
     var attributeValue = "JOBS_SUPPORTED_DIRECT";
-    var normValue = "TOTAL_EMPLOYMENT";
 
     // mapbox API access Token
     var accessToken = 'pk.eyJ1Ijoicm9iaW5icnVucyIsImEiOiJjaW5zZTQ0eGQxMTRqdWttM2M2ZnBsaG94In0.s1doTs0FkLp2ZzYqiUnbTw'
-
-    // // request a mapbox raster tile layer and add to map
-    // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + accessToken, {
-    //   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    //   maxZoom: 18,
-    //   id: 'mapbox.light',
-    //   accessToken: accessToken
-    // }).addTo(map);
 
     var basemap_url =
       'https://api.mapbox.com/styles/v1/robinbruns/ck3vvim0h0ks81cud89l6r2ap/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoicm9iaW5icnVucyIsImEiOiJjaW5zZTQ0eGQxMTRqdWttM2M2ZnBsaG94In0.s1doTs0FkLp2ZzYqiUnbTw'
@@ -208,27 +186,23 @@
         // store reference to currently selected value
         attributeValue = $(this).val();
         console.log("the attribute value is:" + attributeValue);
-        // if (attributeValue == "JOBS_SUPPORTED_DIRECT") {
-        //   normValue = "TOTAL_EMPLOYMENT";
-        //   impactsLayer.setStyle({
-        //     color: '#d4ac91',
-        //   });
-        // } else if (attributeValue == "LABOR_INCOME_DIRECT") {
-        //   normValue = "TOTAL_PERSONAL_INCOME";
-        //   impactsLayer.setStyle({
-        //     color: '#666754',
-        //   });
-        // } else if (attributeValue == "VALUE_ADDED_DIRECT") {
-        //   normValue = "GROSS_REGIONAL_PRODUCT";
-        //   impactsLayer.setStyle({
-        //     color: '#374c5e',
-        //   });
-        // } else if (attributeValue == "OUTPUT_DIRECT") {
-        //   normValue = "GROSS_REGIONAL_PRODUCT";
-        //   impactsLayer.setStyle({
-        //     color: '#4d3a4c',
-        //   });
-        // }
+        if (attributeValue == "JOBS_SUPPORTED_DIRECT") {
+          impactsLayer.setStyle({
+            color: '#b9784a',
+          });
+        } else if (attributeValue == "LABOR_INCOME_DIRECT") {
+          impactsLayer.setStyle({
+            color: '#666754',
+          });
+        } else if (attributeValue == "VALUE_ADDED_DIRECT") {
+          impactsLayer.setStyle({
+            color: '#374c5e',
+          });
+        } else if (attributeValue == "OUTPUT_DIRECT") {
+          impactsLayer.setStyle({
+            color: '#4d3a4c',
+          });
+        }
 
         // call updateMap function
         resizeCircles(impactsLayer, attributeValue);
@@ -237,8 +211,7 @@
     }
 
     function calcRadius(val) {
-
-      var factor = 500;
+      var factor = size[attributeValue];
       var radius = Math.sqrt(val / Math.PI);
       return radius * factor; // adjusts var factor as a scale factor
 
@@ -254,7 +227,7 @@
         // console.log ("attributevalue:" + attributeValue + "normvalue:" + normValue);
 
         var tooltipInfo = props.LOCATION + ", " + props.STATE + "<br>" + props
-          .FOREST_NAME + "<br>" + props[attributeValue]  ;
+          .FOREST_NAME + "<br>" + Number(props[attributeValue]) + " " + label[attributeValue] ;
 
         layer.bindTooltip(tooltipInfo, {
           // sticky property so tooltip follows the mouse
@@ -265,7 +238,7 @@
 
       impactsLayer.on('mouseover', function (e) {
         e.layer.setStyle({
-          fillOpacity: .4,
+          fillOpacity: .3,
           // fillColor: '#d4ac91'
         });
       });
