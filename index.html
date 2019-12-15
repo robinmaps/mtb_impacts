@@ -104,16 +104,16 @@
 
     var size = {
        "JOBS_SUPPORTED_DIRECT": 5,
-       "LABOR_INCOME_DIRECT": .1,
-       "VALUE_ADDED_DIRECT": .1,
-       "OUTPUT_DIRECT": .1,
+       "LABOR_INCOME_DIRECT": .08,
+       "VALUE_ADDED_DIRECT": .08,
+       "OUTPUT_DIRECT": .08,
     }
 
     var label = {
       "JOBS_SUPPORTED_DIRECT": "Full Time Jobs Supported",
-      "LABOR_INCOME_DIRECT": "dollars labor income",
-      "VALUE_ADDED_DIRECT": "dollars value added",
-      "OUTPUT_DIRECT": "dollars output",
+      "LABOR_INCOME_DIRECT": "Dollars Labor Income",
+      "VALUE_ADDED_DIRECT": "Dollars Value Added to GDP",
+      "OUTPUT_DIRECT": "Dollars Increase in Business",
 
     }
 
@@ -161,6 +161,7 @@
 
       impactsLayer.setStyle({
         color: '#b9784a',
+        fillOpacity: .1,
       });
 
 
