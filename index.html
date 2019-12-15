@@ -60,7 +60,7 @@
                 href='https://www.imba.com/sites/default/files/content/resources/2018-11/OA_CusterGallatinNF_MtnBikingStudy2018.pdf'>Custer Gallatin National Forest</a>
   <br>
               <a class='link'
-                href='https://www.imba.com/sites/default/files/content/resources/2018-06/OA_NPNF_MtnBikingStudy.pdf'>Nantahala and Pisgah National Forests</a>
+                href='https://www.imba.com/sites/default/files/content/resources/2018-06/OA_NPNF_MtnBikingStudy.pdf'>Nantahala & Pisgah National Forests</a>
             </li>
             <li>This map was created by
               <a class='link' href='https://robinmaps.com'>Robin Bruns</a>
@@ -187,7 +187,7 @@
 
 
       addUi(impactsLayer); // add the UI controls
-      resizeCircles(impactsLayer, attributeValue, normValue);
+      resizeCircles(impactsLayer, attributeValue);
     }
 
     function addUi(impactsLayer) {
@@ -208,30 +208,30 @@
         // store reference to currently selected value
         attributeValue = $(this).val();
         console.log("the attribute value is:" + attributeValue);
-        if (attributeValue == "JOBS_SUPPORTED_DIRECT") {
-          normValue = "TOTAL_EMPLOYMENT";
-          impactsLayer.setStyle({
-            color: '#d4ac91',
-          });
-        } else if (attributeValue == "LABOR_INCOME_DIRECT") {
-          normValue = "TOTAL_PERSONAL_INCOME";
-          impactsLayer.setStyle({
-            color: '#666754',
-          });
-        } else if (attributeValue == "VALUE_ADDED_DIRECT") {
-          normValue = "GROSS_REGIONAL_PRODUCT";
-          impactsLayer.setStyle({
-            color: '#374c5e',
-          });
-        } else if (attributeValue == "OUTPUT_DIRECT") {
-          normValue = "GROSS_REGIONAL_PRODUCT";
-          impactsLayer.setStyle({
-            color: '#4d3a4c',
-          });
-        }
+        // if (attributeValue == "JOBS_SUPPORTED_DIRECT") {
+        //   normValue = "TOTAL_EMPLOYMENT";
+        //   impactsLayer.setStyle({
+        //     color: '#d4ac91',
+        //   });
+        // } else if (attributeValue == "LABOR_INCOME_DIRECT") {
+        //   normValue = "TOTAL_PERSONAL_INCOME";
+        //   impactsLayer.setStyle({
+        //     color: '#666754',
+        //   });
+        // } else if (attributeValue == "VALUE_ADDED_DIRECT") {
+        //   normValue = "GROSS_REGIONAL_PRODUCT";
+        //   impactsLayer.setStyle({
+        //     color: '#374c5e',
+        //   });
+        // } else if (attributeValue == "OUTPUT_DIRECT") {
+        //   normValue = "GROSS_REGIONAL_PRODUCT";
+        //   impactsLayer.setStyle({
+        //     color: '#4d3a4c',
+        //   });
+        // }
 
         // call updateMap function
-        resizeCircles(impactsLayer, attributeValue, normValue);
+        resizeCircles(impactsLayer, attributeValue);
 
       });
     }
@@ -244,17 +244,17 @@
 
     }
 
-    function resizeCircles(impactsLayer, attributeValue, normValue) {
+    function resizeCircles(impactsLayer, attributeValue) {
 
       impactsLayer.eachLayer(function (layer) {
         var props = layer.feature.properties;
-        var value = props[attributeValue] / props[normValue];
+        var value = props[attributeValue];
         var radius = calcRadius(value);
         layer.setRadius(radius);
         // console.log ("attributevalue:" + attributeValue + "normvalue:" + normValue);
 
-        var tooltipInfo = props.LOCATION + ", " + props.STATE + "<br>" + props[attributeValue] + "<br>" + props
-          .FOREST_NAME;
+        var tooltipInfo = props.LOCATION + ", " + props.STATE + "<br>" + props
+          .FOREST_NAME + "<br>" + props[attributeValue]  ;
 
         layer.bindTooltip(tooltipInfo, {
           // sticky property so tooltip follows the mouse
