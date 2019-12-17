@@ -18,7 +18,7 @@
     h4,
     h5 {
       font-family: 'Comfortaa', cursive;
-        font-weight: bold;
+      font-weight: bold;
       color: #387a60;
 
     }
@@ -44,28 +44,34 @@
       <div class='flex-parent flex-parent--column viewport-third h-full-ml hmax-full bg-white py18 px12'>
         <div class='flex-child flex-child--grow px12 py12 scroll-auto'>
           <h1 class='txt-h3 mb6'>Comparing the Economic Impact of Mountain Biking on Six National Forests</h1>
-          <p>Mountain biking has been shown to deliver benefits beyond the trails. Visitors traveling to mountain biking destinations
+          <p>Mountain biking has been shown to deliver benefits beyond the trails. Visitors traveling to mountain biking
+            destinations
             open their wallets in surrounding communities. The impact of this tourism adds up.
           </p>
           <p>
-            This map shows the economic impact of mountain biking on National Forest lands in 15 study areas in Colorado, Montana, and North Carolina. </p>
-            </p>
-            <br>
+            This map shows the economic impact of mountain biking on National Forest lands in 15 study areas in
+            Colorado, Montana, and North Carolina. </p>
+          </p>
+          <br>
           <img src=https://live.staticflickr.com/8823/29530130822_fa756b0493.jpg alt="Mountain Biker in Forest" />
         </div>
         <footer class='px12 py12 bg-gray-faint txt-s'>
           <h5>About</h5>
           <ul>
-            <li>The economic data was gathered from reports commissioned by Outdoor Alliance and authored by James Maples and Michael Bradley:
-                <br>
+            <li>The economic data was gathered from reports commissioned by Outdoor Alliance and authored by James
+              Maples and Michael Bradley:
+              <br>
               <a class='link'
-                href='https://www.imba.com/sites/default/files/content/resources/2018-11/OA_GMUGNF_MtnBikingStudy2018.pdf'>Grand Mesa, Uncompahgre & Gunnison National Forests</a>
-                <br>
+                href='https://www.imba.com/sites/default/files/content/resources/2018-11/OA_GMUGNF_MtnBikingStudy2018.pdf'>Grand
+                Mesa, Uncompahgre & Gunnison National Forests</a>
+              <br>
               <a class='link'
-                href='https://www.imba.com/sites/default/files/content/resources/2018-11/OA_CusterGallatinNF_MtnBikingStudy2018.pdf'>Custer Gallatin National Forest</a>
-  <br>
+                href='https://www.imba.com/sites/default/files/content/resources/2018-11/OA_CusterGallatinNF_MtnBikingStudy2018.pdf'>Custer
+                Gallatin National Forest</a>
+              <br>
               <a class='link'
-                href='https://www.imba.com/sites/default/files/content/resources/2018-06/OA_NPNF_MtnBikingStudy.pdf'>Nantahala & Pisgah National Forests</a>
+                href='https://www.imba.com/sites/default/files/content/resources/2018-06/OA_NPNF_MtnBikingStudy.pdf'>Nantahala
+                & Pisgah National Forests</a>
             </li>
             <li>This map was created by
               <a class='link' href='https://robinmaps.com'>Robin Bruns</a>
@@ -103,10 +109,10 @@
     });
 
     var size = {
-       "JOBS_SUPPORTED_DIRECT": 5,
-       "LABOR_INCOME_DIRECT": .08,
-       "VALUE_ADDED_DIRECT": .08,
-       "OUTPUT_DIRECT": .08,
+      "JOBS_SUPPORTED_DIRECT": 5,
+      "LABOR_INCOME_DIRECT": .08,
+      "VALUE_ADDED_DIRECT": .08,
+      "OUTPUT_DIRECT": .08,
     }
 
     var label = {
@@ -162,6 +168,20 @@
       impactsLayer.setStyle({
         color: '#b9784a',
         fillOpacity: .1,
+      });
+
+      impactsLayer.on('mouseover', function (e) {
+        e.layer.setStyle({
+          fillOpacity: .3,
+        });
+      });
+
+      impactsLayer.on('mouseout', function (e) {
+
+        // reset the layer style
+        e.layer.setStyle({
+          fillOpacity: 0
+        });
       });
 
 
@@ -228,27 +248,12 @@
         // console.log ("attributevalue:" + attributeValue + "normvalue:" + normValue);
 
         var tooltipInfo = props.LOCATION + ", " + props.STATE + "<br>" + props
-          .FOREST_NAME + "<br>" + Number(props[attributeValue]) + " " + label[attributeValue] ;
+          .FOREST_NAME + "<br>" + Number(props[attributeValue]) + " " + label[attributeValue];
 
         layer.bindTooltip(tooltipInfo, {
           // sticky property so tooltip follows the mouse
           sticky: true,
           tooltipAnchor: [200, 200]
-        });
-      });
-
-      impactsLayer.on('mouseover', function (e) {
-        e.layer.setStyle({
-          fillOpacity: .3,
-          // fillColor: '#d4ac91'
-        });
-      });
-
-      impactsLayer.on('mouseout', function (e) {
-
-        // reset the layer style
-        e.layer.setStyle({
-          fillOpacity: 0
         });
       });
     }
